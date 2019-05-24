@@ -254,6 +254,8 @@ RUN rm -fr builddir && mkdir -p builddir && \
                   -DTRTIS_ENABLE_TENSORFLOW=ON \
                   -DTRTIS_ENABLE_TENSORRT=ON \
                   -DTRTIS_ENABLE_CAFFE2=ON \
+                  -DTRTIS_ENABLE_ONNXRUNTIME=ON \
+                  -DTRTIS_ENABLE_PYTORCH=ON \
                   -DTRTIS_EXTRA_INCLUDE_PATHS="/opt/tensorrtserver/include" \
                   -DTRTIS_EXTRA_LIB_PATHS="/opt/tensorrtserver/lib" \
                   ../build && \
