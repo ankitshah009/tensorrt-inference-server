@@ -108,22 +108,20 @@ BuildBackendConfigMap(
 #endif  // TRTIS_ENABLE_TENSORRT
 
 #ifdef TRTIS_ENABLE_ONNXRUNTIME
-  //// Onnx Onnx
+  //// OnnxRuntime Onnx
   {
-    OnnxPlatformConfig onnx_config;
-    onnx_config.set_autofill(!strict_model_config);
-    platform_config.PackFrom(onnx_config);
-    (*platform_configs)[kOnnxRuntimeOnnxPlatform] = platform_config;
+    auto onnx_config = std::make_shared<OnnxRuntimeBackendFactory::Config>();
+    onnx_config->autofill = !strict_model_config;
+    (*backend_configs)[kOnnxRuntimeOnnxPlatform] = onnx_config;
   }
 #endif  // TRTIS_ENABLE_ONNXRUNTIME
 
 #ifdef TRTIS_ENABLE_PYTORCH
   //// PyTorch LibTorch
   {
-    LibTorchPlatformConfig libtorch_config;
-    libtorch_config.set_autofill(!strict_model_config);
-    platform_config.PackFrom(libtorch_config);
-    (*platform_configs)[kPyTorchLibTorchPlatform] = platform_config;
+    auto libtorch_config = std::make_shared<LibTorchBackendFactory::Config>();
+    libtorch_config->autofill = !strict_model_config;
+    (*backend_configs)[kPyTorchLibTorchPlatform] = libtorch_config;
   }
 #endif  // TRTIS_ENABLE_PYTORCH
 

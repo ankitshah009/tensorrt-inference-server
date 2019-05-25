@@ -179,20 +179,11 @@ RUN apt-get update && \
             libssl-dev \
             libtool
 
-# TensorFlow headers and libraries
+# TensorFlow libraries
 COPY --from=trtserver_tf \
      /usr/local/lib/tensorflow/libtensorflow_cc.so /opt/tensorrtserver/lib/
 COPY --from=trtserver_tf \
      /usr/local/lib/tensorflow/libtensorflow_framework.so /opt/tensorrtserver/lib/
-COPY --from=trtserver_tf \
-     /usr/local/lib/python3.5/dist-packages/tensorflow/include \
-     /opt/tensorrtserver/include/
-COPY --from=trtserver_tf \
-     /opt/tensorflow/tensorflow/c/c_api.h \
-     /opt/tensorrtserver/include/tensorflow/c/
-COPY --from=trtserver_tf \
-     /opt/tensorflow/tensorflow/cc/saved_model/*.h \
-     /opt/tensorrtserver/include/tensorflow/cc/saved_model/
 
 # Caffe2 libraries
 COPY --from=trtserver_caffe2 \
@@ -230,7 +221,7 @@ COPY --from=trtserver_caffe2 /opt/conda/lib/python3.6/site-packages/torch/includ
 # Onnx Runtime library
 ARG ONNX_RUNTIME_VERSION=0.4.0
 COPY --from=trtserver_onnx /workspace/onnxruntime/include/onnxruntime \
-     /usr/local/include/
+     /opt/tensorrtserver/include/onnxruntime/
 COPY --from=trtserver_onnx /workspace/build/Release/libonnxruntime.so.${ONNX_RUNTIME_VERSION} \
      /opt/tensorrtserver/lib/
 RUN ln -s /opt/tensorrtserver/lib/libonnxruntime.so.${ONNX_RUNTIME_VERSION} \
@@ -268,7 +259,7 @@ RUN LIBCUDA_FOUND=$(ldconfig -p | grep -v compat | awk '{print $1}' | grep libcu
                   -DTRTIS_ENABLE_CAFFE2=ON \
                   -DTRTIS_ENABLE_ONNXRUNTIME=ON \
                   -DTRTIS_ENABLE_PYTORCH=ON \
-                  -DTRTIS_EXTRA_INCLUDE_PATHS="/opt/tensorrtserver/include" \
+                  -DTRTIS_ONNXRUNTIME_INCLUDE_PATHS="/opt/tensorrtserver/include/onnxruntime" \
                   -DTRTIS_EXTRA_LIB_PATHS="/opt/tensorrtserver/lib" \
                   ../build && \
             (make -j16 trtis || true) && \

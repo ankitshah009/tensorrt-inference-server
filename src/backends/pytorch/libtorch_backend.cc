@@ -26,13 +26,10 @@
 
 #include "src/backends/pytorch/libtorch_backend.h"
 
-#include <NvInfer.h>
 #include <core/providers/cuda/cuda_provider_factory.h>
 #include <stdint.h>
-#include <cuda.h>
-#include <cuda_runtime.h>
 #include <exception>
-#include "cuda/include/cuda_runtime_api.h"
+#include <cuda_runtime_api.h>
 #include "src/core/constants.h"
 #include "src/core/logging.h"
 #include "src/core/model_config_cuda.h"

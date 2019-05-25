@@ -26,7 +26,6 @@
 #pragma once
 
 #include "src/backends/pytorch/libtorch_backend.h"
-#include "src/backends/pytorch/libtorch_backend.pb.h"
 #include "src/core/status.h"
 
 namespace nvidia { namespace inferenceserver {

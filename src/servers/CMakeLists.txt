@@ -84,7 +84,7 @@ if(${TRTIS_ENABLE_ONNXRUNTIME})
   set(BACKEND_OBJS ${BACKEND_OBJS} $<TARGET_OBJECTS:onnxruntime-backend-library>)
 endif() # TRTIS_ENABLE_ONNXRUNTIME
 if(${TRTIS_ENABLE_PYTORCH})
-  set(BACKEND_OBJS ${BACKEND_OBJS} $<TARGET_OBJECTS:pytorch-backend-library>)
+  set(BACKEND_OBJS ${BACKEND_OBJS} $<TARGET_OBJECTS:libtorch-backend-library>)
 endif() # TRTIS_ENABLE_PYTORCH
 if(${TRTIS_ENABLE_CUSTOM})
   set(BACKEND_OBJS ${BACKEND_OBJS} $<TARGET_OBJECTS:custom-backend-library>)

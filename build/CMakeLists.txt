@@ -37,7 +37,8 @@ option(TRTIS_ENABLE_ONNXRUNTIME "Include ONNXRuntime backend in server" ON)
 option(TRTIS_ENABLE_PYTORCH "Include PyTorch backend in server" ON)
 option(TRTIS_ENABLE_CUSTOM "Include Custom backend in server" ON)
 
-set(TRTIS_EXTRA_INCLUDE_PATHS "" CACHE PATH "Extra include paths for TRTIS build")
+# Multiple paths may be specified by separating them with semicolon
+set(TRTIS_ONNXRUNTIME_INCLUDE_PATHS "" CACHE PATH "Paths to ONNXRuntime includes")
 set(TRTIS_EXTRA_LIB_PATHS "" CACHE PATH "Extra library paths for TRTIS build")
 
 option(TRTIS_ENABLE_ASAN "Build with address sanitizer" OFF)
@@ -289,7 +290,7 @@ ExternalProject_Add(trtis
     -DLibevent_DIR:PATH=${CMAKE_CURRENT_BINARY_DIR}/libevent/install/lib/cmake/libevent
     -Dlibevhtp_DIR:PATH=${CMAKE_CURRENT_BINARY_DIR}/libevhtp/install/lib/cmake/libevhtp
     -Dprometheus-cpp_DIR:PATH=${CMAKE_CURRENT_BINARY_DIR}/prometheus-cpp/install/lib/cmake/prometheus-cpp
-    -DTRTIS_EXTRA_INCLUDE_PATHS:PATH=${TRTIS_EXTRA_INCLUDE_PATHS}
+    -DTRTIS_ONNXRUNTIME_INCLUDE_PATHS:PATH=${TRTIS_ONNXRUNTIME_INCLUDE_PATHS}
     -DTRTIS_EXTRA_LIB_PATHS:PATH=${TRTIS_EXTRA_LIB_PATHS}
     -DTRTIS_ENABLE_ASAN:BOOL=${TRTIS_ENABLE_ASAN}
     -DTRTIS_ENABLE_GPU:BOOL=${TRTIS_ENABLE_GPU}

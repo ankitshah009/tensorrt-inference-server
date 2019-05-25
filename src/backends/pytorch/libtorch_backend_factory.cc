@@ -29,7 +29,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-
 #include "src/core/constants.h"
 #include "src/core/filesystem.h"
 #include "src/core/logging.h"
@@ -43,8 +42,7 @@ LibTorchBackendFactory::Create(
     const LibTorchPlatformConfig& platform_config,
     std::unique_ptr<LibTorchBackendFactory>* factory)
 {
-  LOG_VERBOSE(1) << "Create LibTorchBackendFactory for platform config \""
-                 << platform_config.DebugString() << "\"";
+  LOG_VERBOSE(1) << "Create LibTorchBackendFactory";
 
   factory->reset(new LibTorchBackendFactory(platform_config));
   return Status::Success;
